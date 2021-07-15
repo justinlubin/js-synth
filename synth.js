@@ -95,7 +95,7 @@ function evaluate(p, input) {
       return input;
 
     case "negate":
-      return -evaluate(p.arg, input);
+      return 0 - evaluate(p.arg, input);
 
     case "plus":
       return evaluate(p.left, input) + evaluate(p.right, input);
@@ -181,6 +181,7 @@ function elimEquivalents(plist, inputs) {
 }
 
 // Returns true iff `p` satisfies the given input-output examples
+// (This is our satisfaction relation)
 function isCorrect(p, inputs, outputs) {
   return allEqual(evaluateAll(p, inputs), outputs);
 }
@@ -205,7 +206,7 @@ function synthesize(inputs, outputs) {
 ////////////////////////////////////////////////////////////////////////////////
 // Main
 
-window.onload = function() {
+window.addEventListener("load", function() {
   let statusElement = document.getElementById("status");
   let outputElement = document.getElementById("output");
 
@@ -230,4 +231,4 @@ window.onload = function() {
   } else {
     statusElement.textContent = "Program not found";
   }
-}
+});
